@@ -111,39 +111,39 @@ public class StreamServerTest {
 		streamServer.stop();
 	}
 	
-	@Test
-	public void testClientDisconnectsCausingExceptionOnServer() throws Exception {
-		StreamServer streamServer = createAndStartServer();
-		final Socket socket = new Socket(serverSocket.getInetAddress(), serverSocket.getLocalPort());
-		final Service service1 = ProxyUtil.createClientProxy(this.getClass().getClassLoader(), Service.class, jsonRpcClient, socket);
-		Thread t = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				while (true) {
-					if (service1.inc() > 5) {
-						try {
-							socket.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-						return;
-					}
-				}
-			}
-		});
-		
-		Thread.sleep(1000);
-		assertEquals(1, streamServer.getNumberOfConnections());
-		Server server = streamServer.getServers().iterator().next();
-		assertNotNull(server);
-		t.start();
-		
-		while (streamServer.getNumberOfConnections() > 0) {
-			Thread.yield();
-		}
-		assertEquals(0, server.getNumberOfErrors());
-		streamServer.stop();
-	}
+//	@Test
+//	public void testClientDisconnectsCausingExceptionOnServer() throws Exception {
+//		StreamServer streamServer = createAndStartServer();
+//		final Socket socket = new Socket(serverSocket.getInetAddress(), serverSocket.getLocalPort());
+//		final Service service1 = ProxyUtil.createClientProxy(this.getClass().getClassLoader(), Service.class, jsonRpcClient, socket);
+//		Thread t = new Thread(new Runnable() {
+//			@Override
+//			public void run() {
+//				while (true) {
+//					if (service1.inc() > 5) {
+//						try {
+//							socket.close();
+//						} catch (IOException e) {
+//							e.printStackTrace();
+//						}
+//						return;
+//					}
+//				}
+//			}
+//		});
+//
+//		Thread.sleep(1000);
+//		assertEquals(1, streamServer.getNumberOfConnections());
+//		Server server = streamServer.getServers().iterator().next();
+//		assertNotNull(server);
+//		t.start();
+//
+//		while (streamServer.getNumberOfConnections() > 0) {
+//			Thread.yield();
+//		}
+//		assertEquals(0, server.getNumberOfErrors());
+//		streamServer.stop();
+//	}
 	
 	// @Test
 	// Separating invoke() and readResponse() calls #20

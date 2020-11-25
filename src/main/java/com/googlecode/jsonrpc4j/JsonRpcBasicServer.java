@@ -246,6 +246,18 @@ public class JsonRpcBasicServer {
 		}
 	}
 	
+	public void handleHeartbeatConnected(OutputStream output) {
+		for (JsonRpcInterceptor interceptor : interceptorList) {
+			interceptor.onHeartbeatConnected(output);
+		}
+	}
+
+	public void handleHeartbeatListening() {
+		for (JsonRpcInterceptor interceptor : interceptorList) {
+			interceptor.onHeartbeatListening();
+		}
+	}
+
 	/**
 	 * Returns the handler's class or interfaces.  The variable serviceName is ignored in this class.
 	 *

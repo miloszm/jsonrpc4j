@@ -2,6 +2,7 @@ package com.googlecode.jsonrpc4j;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
+import java.io.OutputStream;
 import java.lang.reflect.Method;
 import java.util.List;
 
@@ -66,4 +67,8 @@ public interface JsonRpcInterceptor {
      * @param json raw JSON RPC response json
      */
     void postHandleJson(JsonNode json);
+
+    void onHeartbeatConnected(OutputStream outputStream);
+
+    void onHeartbeatListening();
 }
