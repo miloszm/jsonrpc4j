@@ -212,7 +212,7 @@ public class StreamServerWithHeartbeats {
 					clientSocket = serverSocket.accept();
 					logger.debug("Client connected: {}:{}", clientSocket.getInetAddress().getHostAddress(), clientSocket.getPort());
 					// spawn a new Server for the next connection and break out of the server loop
-					executor.submit(new Server());
+					//executor.submit(new Server());
 					break;
 				} catch (SocketTimeoutException e) {
 					handleSocketTimeoutException(e);
