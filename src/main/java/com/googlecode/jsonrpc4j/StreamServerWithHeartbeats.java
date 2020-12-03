@@ -274,6 +274,9 @@ public class StreamServerWithHeartbeats {
 					closeQuietly(clientSocket);
 					closeQuietly(input);
 					closeQuietly(output);
+					if (StreamServerWithHeartbeats.this.keepRunning.get()) {
+						executor.submit(new Server());
+					}
 				}
 			}
 		}
