@@ -252,9 +252,10 @@ public class StreamServerWithHeartbeats {
 						} catch (Throwable t) {
 							if (StreamEndedException.class.isInstance(t)) {
 								logger.debug("Client disconnected: {}:{}", clientSocket.getInetAddress().getHostAddress(), clientSocket.getPort());
+								System.out.println("Client disconnected: " + clientSocket.getInetAddress().getHostAddress() + ":" + clientSocket.getPort());
 								break;
 							} else if (SocketTimeoutException.class.isInstance(t)){
-								System.out.println("on_connected_heartbeat " + connectedCounter.getAndIncrement() + " thread = " + Thread.currentThread().getId());
+								//System.out.println("on_connected_heartbeat " + connectedCounter.getAndIncrement() + " thread = " + Thread.currentThread().getId());
 								jsonRpcServer.handleHeartbeatConnected(output);
 								continue;
 							}
